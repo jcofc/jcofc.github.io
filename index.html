@@ -295,6 +295,18 @@
     .socials-grid { grid-template-columns: 1fr 1fr; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; }
     .footer-copy { text-align: center; }
+
+    /* Calendar: keep header aligned with grid by allowing horizontal scroll and reduced min-width */
+    .cal-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .cal-days-header, .cal-grid { min-width: 490px; }
+    .cal-cell { min-height: 60px; padding: 0.45rem 0.55rem; }
+    .cal-day-name { font-size: 0.52rem; padding: 0.45rem 0; }
+
+    /* Music: move action buttons under title on mobile */
+    .music-item { align-items: flex-start; }
+    .music-info { order: 1; min-width: 0; }
+    .music-btns { order: 2; flex-basis: 100%; justify-content: flex-start; margin-top: 0.6rem; gap: 0.5rem; }
+    .music-type { white-space: normal; }
   }
 </style>
 </head>
