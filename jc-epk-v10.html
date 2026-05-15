@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JC — Electronic Press Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0a0a0a; --white: #f0ede8; --yellow: #f5c400; --red: #cc2200;
+    --gray: #1a1a1a; --gray2: #2a2a2a; --gray3: #3a3a3a; --muted: #888;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--yellow); }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 2.5rem; background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(245,196,0,0.15); }
+  .nav-logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.06em; color: var(--yellow); }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--yellow); }
+  .nav-cta { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--black); background: var(--yellow); padding: 0.5rem 1.2rem; text-decoration: none; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--white); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 80px 2.5rem 4rem; position: relative; overflow: hidden; }
+  .hero-photo { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+  .hero-photo-placeholder { width: 100%; height: 100%; background: var(--gray2); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; }
+  .hero-photo-placeholder-icon { width: 48px; height: 48px; border: 1px solid rgba(245,196,0,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(245,196,0,0.3); font-size: 1.5rem; }
+  .hero-photo-placeholder-text { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(240,237,232,0.2); }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.55) 40%, rgba(10,10,10,0.92) 75%, var(--black) 100%); z-index: 1; }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(245,196,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245,196,0,0.03) 1px, transparent 1px); background-size: 60px 60px; z-index: 2; }
+  .hero-accent { position: absolute; top: 15%; right: 8%; width: 420px; height: 420px; border: 1px solid rgba(245,196,0,0.06); transform: rotate(15deg); z-index: 2; }
+  .hero-accent2 { position: absolute; top: 20%; right: 12%; width: 320px; height: 320px; border: 1px solid rgba(204,34,0,0.04); transform: rotate(30deg); z-index: 2; }
+  .hero-content { position: relative; z-index: 3; max-width: 900px; }
+  .hero-tag { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-tag::before { content: ''; display: inline-block; width: 2rem; height: 1px; background: var(--red); }
+  .hero-name { font-family: var(--font-display); font-size: clamp(7rem, 18vw, 16rem); line-height: 0.88; letter-spacing: 0.02em; color: var(--yellow); margin-bottom: 1.5rem; }
+  .hero-desc { font-size: 1rem; color: var(--muted); max-width: 520px; line-height: 1.7; margin-bottom: 2.5rem; font-weight: 300; }
+  .hero-tags { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .hero-pill { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 1rem; border: 1px solid rgba(245,196,0,0.3); color: var(--yellow); }
+  .hero-pill.red { border-color: rgba(204,34,0,0.4); color: #ff4422; }
+  .hero-pill.white { border-color: rgba(240,237,232,0.2); color: var(--muted); }
+
+  /* TICKER */
+  .ticker-wrap { overflow: hidden; background: var(--yellow); padding: 0.6rem 0; white-space: nowrap; }
+  .ticker-inner { display: inline-flex; animation: ticker 24s linear infinite; }
+  .ticker-item { font-family: var(--font-display); font-size: 0.9rem; letter-spacing: 0.15em; color: var(--black); padding: 0 2rem; }
+  .ticker-dot { color: var(--red); padding: 0 0.5rem; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* DIVIDER */
+  .divider { width: 100%; height: 1px; background: linear-gradient(to right, var(--yellow), transparent); opacity: 0.25; }
+
+  /* SECTIONS */
+  section { padding: 6rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+  .section-label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--yellow); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.75rem; }
+  .section-label::before { content: ''; display: inline-block; width: 1.5rem; height: 1px; background: var(--yellow); }
+  .section-title { font-family: var(--font-display); font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 2.5rem; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text { font-size: 1.05rem; line-height: 1.85; font-weight: 300; color: rgba(240,237,232,0.85); }
+  .about-text p { margin-bottom: 1.5rem; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-text strong { color: var(--white); font-weight: 500; }
+  .about-sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+  .sidebar-block { border-left: 2px solid var(--yellow); padding-left: 1.25rem; }
+  .sidebar-block.red { border-color: var(--red); }
+  .sidebar-label { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .sidebar-value { font-size: 0.95rem; color: var(--white); font-weight: 400; line-height: 1.5; }
+
+  /* INFLUENCES */
+  .influences-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gray2); margin-top: 2rem; }
+  .influence-card { background: var(--gray); padding: 1.75rem 1.5rem; position: relative; overflow: hidden; transition: background 0.2s; }
+  .influence-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--yellow); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .influence-card:hover { background: var(--gray2); }
+  .influence-card:hover::before { transform: scaleX(1); }
+  .influence-num { font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+  .influence-name { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 0.04em; color: var(--white); margin-bottom: 0.3rem; }
+  .influence-desc { font-size: 0.8rem; color: var(--muted); font-weight: 300; font-style: italic; }
+
+  /* QUOTE */
+  .quote-section { padding: 5rem 2.5rem; position: relative; overflow: hidden; border-top: 1px solid var(--gray2); border-bottom: 1px solid var(--gray2); }
+  .quote-photo { position: absolute; inset: 0; z-index: 0; }
+  .quote-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  .quote-photo-placeholder { width: 100%; height: 100%; background: var(--gray); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; }
+  .quote-photo-placeholder-icon { width: 36px; height: 36px; border: 1px solid rgba(245,196,0,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(245,196,0,0.25); font-size: 1.1rem; }
+  .quote-photo-placeholder-text { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(240,237,232,0.15); }
+  .quote-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.55) 50%, rgba(10,10,10,0.7) 100%); z-index: 1; }
+  .quote-inner { max-width: 800px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+  .quote-mark { font-family: var(--font-display); font-size: 5rem; color: var(--yellow); line-height: 0.5; margin-bottom: 1.5rem; display: block; }
+  .quote-text { font-family: var(--font-body); font-size: clamp(1.2rem, 2.5vw, 1.75rem); font-weight: 300; line-height: 1.8; color: var(--white); font-style: italic; margin-bottom: 2rem; }
+  .quote-attr { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+  /* LIVE */
+  .live-intro { font-size: 1.05rem; color: rgba(240,237,232,0.7); font-weight: 300; max-width: 600px; margin-bottom: 3rem; line-height: 1.8; }
+  .live-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--gray2); }
+  .live-card { background: var(--gray); padding: 2rem 1.75rem; position: relative; }
+  .live-card::after { content: attr(data-num); position: absolute; top: 1.5rem; right: 1.75rem; font-family: var(--font-display); font-size: 3.5rem; color: rgba(245,196,0,0.06); line-height: 1; pointer-events: none; }
+  .live-card-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--yellow); margin-bottom: 0.5rem; }
+  .live-card-title { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.03em; color: var(--white); margin-bottom: 0.75rem; }
+  .live-card-text { font-size: 0.85rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+  /* MUSIC */
+  .music-list { display: flex; flex-direction: column; gap: 1px; background: var(--gray2); margin-top: 2rem; }
+  .music-item { background: var(--gray); display: flex; align-items: center; gap: 1.5rem; padding: 1.25rem 1.5rem; transition: background 0.2s; flex-wrap: wrap; }
+  .music-item:hover { background: var(--gray2); }
+  .music-num { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); min-width: 2rem; letter-spacing: 0.1em; }
+  .music-info { flex: 1; min-width: 150px; }
+  .music-title { font-size: 0.95rem; font-weight: 500; color: var(--white); margin-bottom: 0.15rem; }
+  .music-meta { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; }
+  .music-btns { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .music-type { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.75rem; border: 1px solid; border-radius: 9999px; text-decoration: none; transition: opacity 0.2s, background 0.2s, color 0.2s; white-space: nowrap; background: transparent; }
+  .music-type:hover { opacity: 0.85; }
+  .music-type.apple { border-color: #cc2200; color: #cc2200; }
+  .music-type.spotify { border-color: #1db954; color: #1db954; }
+  .music-type.youtube { border-color: #ff0000; color: #ffffff; }
+  .music-type.soundcloud { border-color: #ff7f00; color: #ff7f00; }
+  .music-type.original, .music-type.mix, .music-type.remix { color: inherit; border-color: currentColor; background: transparent; }
+
+  /* PLATFORMS */
+  .platforms-row { display: flex; gap: 1px; background: var(--gray2); margin-top: 1px; }
+  .platform-item { flex: 1; background: var(--gray); padding: 1.5rem 1.25rem; text-align: center; text-decoration: none; transition: background 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .platform-item:hover { background: var(--gray3); }
+  .platform-name { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .platform-action { font-size: 0.75rem; color: var(--yellow); }
+
+  /* GIGS */
+  .gigs-grid { display: flex; flex-direction: column; gap: 1px; background: var(--gray2); margin-top: 2rem; }
+  .gig-item { background: var(--gray); display: grid; grid-template-columns: 2.5rem 1fr; align-items: center; gap: 1.5rem; padding: 1.5rem 1.75rem; transition: background 0.2s; position: relative; overflow: hidden; }
+  .gig-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--yellow); transform: scaleY(0); transform-origin: bottom; transition: transform 0.3s; }
+  .gig-item:hover { background: var(--gray2); }
+  .gig-item:hover::before { transform: scaleY(1); }
+  .gig-item.featured { background: var(--gray2); }
+  .gig-item.featured::before { transform: scaleY(1); }
+  .gig-num { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
+  .gig-info { flex: 1; }
+  .gig-title { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.04em; color: var(--white); margin-bottom: 0.2rem; line-height: 1.1; }
+  .gig-detail { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .gig-role { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.75rem; border: 1px solid; display: inline-block; }
+  .gig-role.support { border-color: rgba(245,196,0,0.4); color: var(--yellow); }
+  .gig-role.closing { border-color: rgba(204,34,0,0.4); color: #ff4422; }
+  .gig-role.headline { border-color: rgba(240,237,232,0.3); color: var(--white); }
+
+  /* GALLERY */
+  .gallery-intro { font-size: 1rem; color: rgba(240,237,232,0.6); font-weight: 300; max-width: 520px; margin-bottom: 2.5rem; line-height: 1.8; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gray2); }
+  .gallery-slot { background: var(--gray3); aspect-ratio: 1; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .gallery-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gallery-slot:hover { background: var(--gray2); }
+  .gallery-slot.wide { grid-column: span 2; aspect-ratio: 2/1; }
+  .gallery-slot.tall { grid-row: span 2; aspect-ratio: 1/2; }
+  .gallery-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 100%; padding: 1.5rem; }
+  .gallery-icon { width: 32px; height: 32px; border: 1px solid rgba(245,196,0,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(245,196,0,0.4); font-size: 1.2rem; line-height: 1; padding-bottom: 1px; }
+  .gallery-slot-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(240,237,232,0.2); text-align: center; line-height: 1.6; }
+  .gallery-note { margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.06em; line-height: 1.7; padding: 1rem 1.25rem; border: 1px solid var(--gray2); }
+
+  /* RIDERS */
+  .rider-intro { font-size: 1rem; color: rgba(240,237,232,0.6); font-weight: 300; max-width: 520px; margin-bottom: 2.5rem; line-height: 1.8; }
+  .rider-list { display: flex; flex-direction: column; gap: 1px; background: var(--gray2); margin-top: 2rem; }
+  .rider-item { background: var(--gray); overflow: hidden; }
+  .rider-header { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 1.75rem; cursor: pointer; transition: background 0.2s; user-select: none; }
+  .rider-header:hover { background: var(--gray2); }
+  .rider-header-left { display: flex; align-items: center; gap: 1.25rem; }
+  .rider-num { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; min-width: 2rem; }
+  .rider-title { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.04em; color: var(--white); }
+  .rider-arrow { font-size: 0.8rem; color: var(--yellow); transition: transform 0.3s; font-family: var(--font-mono); }
+  .rider-item.open .rider-arrow { transform: rotate(180deg); }
+  .rider-item.open .rider-header { background: var(--gray2); }
+  .rider-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 1.75rem; }
+  .rider-item.open .rider-body { max-height: 600px; padding: 1.5rem 1.75rem; border-top: 1px solid var(--gray2); }
+  .rider-body-content { font-size: 0.9rem; color: rgba(240,237,232,0.75); font-weight: 300; line-height: 1.85; }
+  .rider-body-content p { margin-bottom: 0.75rem; }
+  .rider-body-content p:last-child { margin-bottom: 0; }
+
+  /* CALENDAR */
+  .cal-wrap { margin-top: 2rem; background: var(--gray); }
+  .cal-header { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 1.75rem; border-bottom: 1px solid var(--gray2); }
+  .cal-nav-btn { font-family: var(--font-mono); font-size: 0.75rem; color: var(--yellow); background: none; border: 1px solid rgba(245,196,0,0.3); padding: 0.4rem 1rem; cursor: pointer; transition: all 0.2s; letter-spacing: 0.1em; }
+  .cal-nav-btn:hover { background: rgba(245,196,0,0.1); border-color: var(--yellow); }
+  .cal-month-label { font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.06em; color: var(--white); text-align: center; }
+  .cal-year-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--yellow); letter-spacing: 0.15em; text-align: center; margin-top: 2px; }
+  .cal-days-header { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: var(--gray2); border-bottom: 1px solid var(--gray2); }
+  .cal-day-name { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-align: center; padding: 0.75rem 0; background: var(--gray); }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: var(--gray2); }
+  .cal-cell { background: var(--gray); min-height: 80px; padding: 0.6rem 0.75rem; position: relative; transition: background 0.2s; display: flex; flex-direction: column; align-items: flex-start; }
+  .cal-cell.empty { background: var(--black); opacity: 0.3; cursor: default; pointer-events: none; }
+  .cal-cell.today { background: var(--gray2); }
+  .cal-cell.today::after { content: ''; position: absolute; top: 6px; right: 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); }
+  .cal-date { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+  .cal-cell.today .cal-date { color: var(--yellow); font-weight: 500; }
+  .cal-event { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; margin-bottom: 3px; display: block; border-radius: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+  .cal-event.gig { background: rgba(245,196,0,0.15); color: var(--yellow); border-left: 2px solid var(--yellow); }
+  .cal-event.session { background: rgba(204,34,0,0.15); color: #ff4422; border-left: 2px solid var(--red); }
+  .cal-cell.blocked { background: rgba(136,136,136,0.05); pointer-events: none; }
+  .cal-cell.blocked .cal-date { color: rgba(136,136,136,0.35); }
+  .cal-cell.elapsed { background: var(--gray); pointer-events: none; opacity: 0.35; }
+  .cal-event.blocked-label { background: rgba(136,136,136,0.1); color: rgba(136,136,136,0.45); border-left: 2px solid rgba(136,136,136,0.2); font-style: italic; }
+  .cal-cell:not(.blocked):not(.empty):not(.elapsed):hover { background: rgba(245,196,0,0.06); cursor: pointer; }
+  .cal-cell:not(.blocked):not(.empty):not(.elapsed):hover .cal-date { color: var(--yellow); }
+  .cal-legend { display: flex; gap: 1.5rem; padding: 1rem 1.75rem; border-top: 1px solid var(--gray2); flex-wrap: wrap; }
+  .cal-legend-item { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .cal-legend-dot { width: 8px; height: 8px; border-radius: 1px; }
+  .cal-legend-dot.gig { background: var(--yellow); }
+  .cal-legend-dot.session { background: var(--red); }
+  .cal-legend-dot.unavailable { background: rgba(136,136,136,0.4); }
+
+  /* CALENDAR MODAL */
+  #cal-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  #cal-modal.visible { opacity: 1; pointer-events: all; }
+  #cal-modal-backdrop { position: absolute; inset: 0; background: rgba(10,10,10,0.8); backdrop-filter: blur(6px); }
+  #cal-modal-box { position: relative; z-index: 1; background: var(--gray); border: 1px solid rgba(245,196,0,0.2); padding: 2.5rem 2rem; width: 90%; max-width: 380px; text-align: center; transform: translateY(20px); transition: transform 0.3s; }
+  #cal-modal.visible #cal-modal-box { transform: translateY(0); }
+  #cal-modal-label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--yellow); margin-bottom: 0.5rem; }
+  #cal-modal-date { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.04em; color: var(--white); margin-bottom: 2rem; line-height: 1.2; }
+  #cal-modal-btns { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
+  .cal-modal-btn { display: flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0.9rem 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; border: 1px solid; }
+  .cal-modal-btn.email { border-color: rgba(245,196,0,0.4); color: var(--yellow); background: rgba(245,196,0,0.05); }
+  .cal-modal-btn.email:hover { background: rgba(245,196,0,0.12); }
+  .cal-modal-btn.whatsapp { border-color: rgba(37,211,102,0.4); color: #25d366; background: rgba(37,211,102,0.05); }
+  .cal-modal-btn.whatsapp:hover { background: rgba(37,211,102,0.12); }
+  .cal-modal-btn.call { border-color: rgba(240,237,232,0.2); color: var(--muted); background: rgba(240,237,232,0.03); }
+  .cal-modal-btn.call:hover { background: rgba(240,237,232,0.08); color: var(--white); }
+  .cal-modal-icon { font-size: 1rem; }
+  #cal-modal-close { background: none; border: none; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 0.25rem 0.5rem; transition: color 0.2s; }
+  #cal-modal-close:hover { color: var(--white); }
+  #cal-modal-gig-info { background: rgba(245,196,0,0.05); border: 1px solid rgba(245,196,0,0.15); padding: 0.875rem 1.25rem; margin-bottom: 1.5rem; text-align: left; }
+  .cal-modal-gig-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.2rem 0; }
+  .cal-modal-gig-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .cal-modal-gig-value { font-family: var(--font-mono); font-size: 0.75rem; color: var(--yellow); letter-spacing: 0.06em; text-align: right; }
+
+  /* SOCIALS */
+  .socials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gray2); margin-top: 2rem; }
+  .social-card { background: var(--gray); padding: 1.75rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; text-decoration: none; transition: background 0.2s; position: relative; overflow: hidden; }
+  .social-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--yellow); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .social-card:hover { background: var(--gray2); }
+  .social-card:hover::before { transform: scaleX(1); }
+  .social-icon-wrap { color: var(--yellow); flex-shrink: 0; opacity: 0.8; transition: opacity 0.2s; }
+  .social-card:hover .social-icon-wrap { opacity: 1; }
+  .social-info { flex: 1; }
+  .social-platform { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: 0.04em; color: var(--white); line-height: 1; margin-bottom: 0.3rem; }
+  .social-handle { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; }
+  .social-arrow { font-family: var(--font-mono); font-size: 0.9rem; color: var(--yellow); opacity: 0; transition: opacity 0.2s; }
+  .social-card:hover .social-arrow { opacity: 1; }
+
+  /* CONTACT */
+  .contact-wrap { margin-top: 2.5rem; }
+  .contact-card-single { background: var(--gray); padding: 3rem 2.5rem; }
+  .contact-type { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--yellow); margin-bottom: 1rem; }
+  .contact-title { font-family: var(--font-display); font-size: 3rem; letter-spacing: 0.03em; color: var(--white); margin-bottom: 0.75rem; }
+  .contact-desc { font-size: 0.95rem; color: var(--muted); font-weight: 300; line-height: 1.8; margin-bottom: 2rem; max-width: 600px; }
+  .contact-email { font-family: var(--font-mono); font-size: 1rem; color: var(--yellow); text-decoration: none; border-bottom: 1px solid rgba(245,196,0,0.3); padding-bottom: 3px; transition: border-color 0.2s; }
+  .contact-email:hover { border-color: var(--yellow); }
+
+  /* FOOTER */
+  footer { background: var(--gray); border-top: 1px solid var(--gray2); padding: 2.5rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: var(--font-display); font-size: 2.5rem; color: var(--yellow); letter-spacing: 0.06em; }
+  .footer-copy { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); text-align: right; line-height: 1.8; }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.55rem; }
+    section { padding: 4rem 1.25rem; }
+    .hero { padding: 80px 1.25rem 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .influences-grid { grid-template-columns: 1fr 1fr; }
+    .live-grid { grid-template-columns: 1fr; }
+    .gig-item { grid-template-columns: 2rem 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-slot.wide { grid-column: span 2; }
+    .gallery-slot.tall { grid-row: span 1; aspect-ratio: 1; }
+    .platforms-row { flex-wrap: wrap; }
+    .platform-item { flex: 1 1 45%; }
+    .socials-grid { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .footer-copy { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">JC</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#sound">Sound</a></li>
+    <li><a href="#live">Live</a></li>
+    <li><a href="#music">Music</a></li>
+    <li><a href="#gigs">Gigs</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#socials">Socials</a></li>
+    <li><a href="#riders">Riders</a></li>
+    <li><a href="#calendar">Calendar</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book JC</a>
+</nav>
+
+<section class="hero" style="max-width:100%;">
+  <div class="hero-photo">
+    <img src="https://i.ibb.co/PvbfB8qK/Screenshot-2026-05-15-at-5-18-40-PM.png" alt="JC hero photo">
+  </div>
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-accent2"></div>
+  <div class="hero-content">
+    <p class="hero-tag">Electronic Press Kit — 2026</p>
+    <h1 class="hero-name">JC</h1>
+    <p class="hero-desc">Melodic &amp; progressive house artist. Started in Manipal. Built in Chennai. Expanding in Bangalore — and beyond.</p>
+    <div class="hero-tags">
+      <span class="hero-pill">Progressive House</span>
+      <span class="hero-pill">Melodic House / Techno</span>
+      <span class="hero-pill red">Bangalore</span>
+      <span class="hero-pill white">Available for Booking</span>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="ticker-item">Cinematic</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Melodic</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Progressive</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Groove Linguist</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Emotion Architect</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Cinematic</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Melodic</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Progressive</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Groove Linguist</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">Emotion Architect</span><span class="ticker-dot">✦</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<section id="about" style="padding-top:7rem;">
+  <p class="section-label fade-up">About</p>
+  <h2 class="section-title fade-up">Who is<br>JC</h2>
+  <div class="about-grid fade-up">
+    <div class="about-text">
+      <p><strong>JC didn't wait for permission.</strong></p>
+      <p>It started in Manipal — late nights, packed rooms, and a nickname that stuck. His friends called him JC, short for Johaan Chanda, and the name followed him everywhere it mattered.</p>
+      <p>After university, he returned home to Chennai for a year and a half — not to slow down, but to build his foundation. To sharpen the craft. To develop the production skills and performance instincts that would carry him further than any stage he'd stood on before.</p>
+      <p>But Chennai was just the beginning.</p>
+      <p>Now based in Bangalore, JC is operating on a different level. Shaped by the emotional depth of Dosem, the raw energy of Eric Prydz, the hypnotic pull of Adriatique, the melodic soul of Marsh and Tinlicker — his progressive and melodic house sound hits hard and feels even harder. This is music built not just for India, but for the world.</p>
+      <p><em>The city changed. The hunger didn't.</em></p>
+    </div>
+    <div class="about-sidebar">
+      <div class="sidebar-block"><p class="sidebar-label">Based in</p><p class="sidebar-value">Bangalore, India</p></div>
+      <div class="sidebar-block"><p class="sidebar-label">Originally from</p><p class="sidebar-value">Chennai, Tamil Nadu</p></div>
+      <div class="sidebar-block"><p class="sidebar-label">Started in</p><p class="sidebar-value">Manipal, Karnataka</p></div>
+      <div class="sidebar-block"><p class="sidebar-label">Genre</p><p class="sidebar-value">Melodic House &amp; Progressive House</p></div>
+      <div class="sidebar-block"><p class="sidebar-label">Vibe</p><p class="sidebar-value">Euphoric · Uplifting · Cinematic</p></div>
+      <div class="sidebar-block red"><p class="sidebar-label">Status</p><p class="sidebar-value">Available for bookings — India &amp; International</p></div>
+      <div class="sidebar-block"><p class="sidebar-label">Content</p><p class="sidebar-value">JC Sessions · Set Rec Volumes · Original Releases · Remixes · Instagram</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="sound">
+  <p class="section-label fade-up">Sound</p>
+  <h2 class="section-title fade-up">The<br>Influences</h2>
+  <div class="influences-grid fade-up">
+    <div class="influence-card"><p class="influence-num">01</p><p class="influence-name">Dosem</p><p class="influence-desc">Emotional depth and precision</p></div>
+    <div class="influence-card"><p class="influence-num">02</p><p class="influence-name">Marsh</p><p class="influence-desc">Melodic soul and warmth</p></div>
+    <div class="influence-card"><p class="influence-num">03</p><p class="influence-name">Adriatique</p><p class="influence-desc">Hypnotic, layered textures</p></div>
+    <div class="influence-card"><p class="influence-num">04</p><p class="influence-name">Eric Prydz</p><p class="influence-desc">Raw energy and anthemic power</p></div>
+    <div class="influence-card"><p class="influence-num">05</p><p class="influence-name">Tinlicker</p><p class="influence-desc">Delicate emotion and atmosphere</p></div>
+    <div class="influence-card"><p class="influence-num">06</p><p class="influence-name">Yotto</p><p class="influence-desc">Progressive drive and momentum</p></div>
+    <div class="influence-card"><p class="influence-num">07</p><p class="influence-name">Anyasa</p><p class="influence-desc">Euphoric energy and presence</p></div>
+  </div>
+</section>
+
+<div class="quote-section">
+  <div class="quote-photo">
+    <img src="https://i.ibb.co/1GPPQVKM/Screenshot-2026-05-15-at-5-20-54-PM.png" alt="Quote background photo">
+  </div>
+  <div class="quote-overlay"></div>
+  <div class="quote-inner">
+    <span class="quote-mark">"</span>
+    <p class="quote-text">Starts with emotion.<br>Builds to a journey.<br>Comes together in groovy ecstasy.</p>
+    <p class="quote-attr">JC — Artist Statement</p>
+  </div>
+</div>
+
+<section id="live">
+  <p class="section-label fade-up">Live</p>
+  <h2 class="section-title fade-up">The<br>Experience</h2>
+  <p class="live-intro fade-up">JC doesn't just play music — he builds worlds. From intimate house sessions in Bangalore to open-format club sets, the experience is always the same: euphoric, considered, and impossible to forget.</p>
+  <div class="live-grid fade-up">
+    <div class="live-card" data-num="01">
+      <p class="live-card-label">Series</p>
+      <p class="live-card-title">JC Sessions</p>
+      <p class="live-card-text">An intimate recorded series hosted in Bangalore — 10 to 15 people, one hour, no compromise. The format distils everything JC does into its purest form. Raw, personal, and deeply musical.</p>
+    </div>
+    <div class="live-card" data-num="02">
+      <p class="live-card-label">Club Sets</p>
+      <p class="live-card-title">Live Performance</p>
+      <p class="live-card-text">Extended DJ sets built for dancefloors. JC reads the room and builds the arc — from atmospheric openers to peak-time euphoria. Direct support for Anyasa. Every set is different. Every set is complete.</p>
+    </div>
+    <div class="live-card" data-num="03">
+      <p class="live-card-label">Journey</p>
+      <p class="live-card-title">Manipal → Chennai → Bangalore</p>
+      <p class="live-card-text">Born in Manipal. Grown in Chennai. Expanding in Bangalore. Every city a chapter — each one louder than the last. This isn't a story of luck. It's a story of intention.</p>
+    </div>
+    <div class="live-card" data-num="04">
+      <p class="live-card-label">Availability</p>
+      <p class="live-card-title">Bookings Open</p>
+      <p class="live-card-text">Available for club nights, festival slots, private events, and brand activations across India and internationally. Rider and technical requirements available on request.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="music">
+  <p class="section-label fade-up">Music</p>
+  <h2 class="section-title fade-up">Releases &amp;<br>Mixes</h2>
+  <div class="music-list fade-up">
+    <div class="music-item">
+      <span class="music-num">01</span>
+      <div class="music-info"><p class="music-title">Ascension - Single</p><p class="music-meta">Single · 2026</p></div>
+      <div class="music-btns">
+        <a href="https://open.spotify.com/track/1GnXjLw5j05mzVFroRJRHy?si=c33dc430c0e94b4d" target="_blank" class="music-type spotify">Spotify ↗</a>
+        <a href="https://music.apple.com/in/album/ascension/1895010123?i=6762785189" target="_blank" class="music-type apple">Apple Music ↗</a>
+      </div>
+    </div>
+
+    <!-- ── JC SESSIONS ── To add: duplicate block below. Format: Location · DD · Month · YYYY -->
+    <div class="music-item">
+      <span class="music-num">S1</span>
+      <div class="music-info">
+        <p class="music-title">JC Sessions Vol. 1</p>
+        <p class="music-meta">Recorded Session</p>
+      </div>
+      <div class="music-btns">
+        <a href="https://youtu.be/_7hFLydiWOg?si=865DaIQrZOuZvkno" target="_blank" class="music-type youtube">YouTube ↗</a>
+      </div>
+    </div>
+
+    <!-- ── SET REC VOLUMES ── To add: duplicate block below. Format: Location · DD · Month · YYYY -->
+    <div class="music-item">
+      <span class="music-num">R1</span>
+      <div class="music-info">
+        <p class="music-title">Set Rec Vol. 5 — Opening for Anyasa</p>
+        <p class="music-meta">Live · 2026</p>
+      </div>
+      <div class="music-btns">
+        <a href="https://www.youtube.com/watch?v=2rg9RAjcasM" target="_blank" class="music-type youtube">YouTube ↗</a>
+        <a href="https://soundcloud.com/dj-jc-ofc-741423398/set-rec-vol-5-opening-for-anyasa?si=0ab280c6411d418d962dfffcee498900&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" class="music-type soundcloud">SoundCloud ↗</a>
+      </div>
+    </div>
+
+    <div class="music-item">
+      <span class="music-num">05</span>
+      <div class="music-info"><p class="music-title">Rasiya - Anyasa (JC Remix)</p><p class="music-meta">Remix · 2026</p></div>
+      <div class="music-btns">
+        <a href="https://soundcloud.com/dj-jc-ofc-741423398/rasiya-anyasa-jc-remix?si=887bc946e97c4786bcebcf160e5b208e&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" class="music-type soundcloud">SoundCloud ↗</a>
+      </div>
+    </div>
+  </div>
+  <div class="platforms-row">
+    <a href="https://spotify.com" target="_blank" class="platform-item"><span class="platform-name">Spotify</span><span class="platform-action">Listen →</span></a>
+    <a href="https://soundcloud.com" target="_blank" class="platform-item"><span class="platform-name">SoundCloud</span><span class="platform-action">Stream →</span></a>
+    <a href="https://youtube.com" target="_blank" class="platform-item"><span class="platform-name">YouTube</span><span class="platform-action">Watch →</span></a>
+    <a href="https://instagram.com/jc.audiio" target="_blank" class="platform-item"><span class="platform-name">Instagram</span><span class="platform-action">Follow →</span></a>
+    <a href="https://beatport.com" target="_blank" class="platform-item"><span class="platform-name">Beatport</span><span class="platform-action">Buy →</span></a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="gigs">
+  <p class="section-label fade-up">Notable Gigs</p>
+  <h2 class="section-title fade-up">On<br>Stage</h2>
+  <div class="gigs-grid fade-up">
+    <div class="gig-item featured">
+      <span class="gig-num">01</span>
+      <div class="gig-info"><p class="gig-title">Anyasa</p><p class="gig-detail">Groove on the Roof · Chennai · Nov 2025</p><span class="gig-role support">Direct Support</span><div class="music-btns"><a href="https://youtu.be/2rg9RAjcasM?si=bARsf7egiw5_hrIt" target="_blank" class="music-type youtube">YouTube ↗</a></div></div>
+    </div>
+    <div class="gig-item">
+      <span class="gig-num">02</span>
+      <div class="gig-info"><p class="gig-title">Answer</p><p class="gig-detail">Groove on the Roof 3rd Anniversary · Living Room · Chennai · May 2025</p><span class="gig-role support">Support</span><div class="music-btns"><a href="https://youtu.be/duVFpOBqXqM?si=Jin3FAnwUVfip7PJ" target="_blank" class="music-type youtube">YouTube ↗</a></div></div>
+    </div>
+    <div class="gig-item">
+      <span class="gig-num">03</span>
+      <div class="gig-info"><p class="gig-title">Fake Tattoos</p><p class="gig-detail">Groove on the Roof · Chennai · Dec 2024</p><span class="gig-role support">Direct Support</span></div>
+    </div>
+    <div class="gig-item">
+      <span class="gig-num">04</span>
+      <div class="gig-info"><p class="gig-title">Akhlad Ahmed</p><p class="gig-detail">Collective Culture · Leela Palace · Chennai · Nov 2025</p><span class="gig-role closing">Closing Set</span></div>
+    </div>
+    <div class="gig-item">
+      <span class="gig-num">05</span>
+      <div class="gig-info"><p class="gig-title">Headline Sets</p><p class="gig-detail">Various Venues · Manipal · Feb — May 2024</p><span class="gig-role headline">Headline</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="gallery">
+  <p class="section-label fade-up">Gallery</p>
+  <h2 class="section-title fade-up">In<br>Frame</h2>
+  <p class="gallery-intro fade-up">Photos from sessions, shows, and the city. Wide and standard gallery shots are placed for the right visual balance.</p>
+  <div class="gallery-grid fade-up">
+    <div class="gallery-slot wide"><img src="https://i.ibb.co/d0hdMKMP/Screenshot-2026-05-15-at-5-19-27-PM.png" alt="Gallery photo 1"></div>
+    <div class="gallery-slot"><img src="https://i.ibb.co/MkMbXHzr/Screenshot-2026-05-15-at-5-16-51-PM.png" alt="Gallery photo 2"></div>
+    <div class="gallery-slot"><img src="https://i.ibb.co/0R4JT7g3/Screenshot-2026-05-15-at-5-17-23-PM.png" alt="Gallery photo 3"></div>
+    <div class="gallery-slot"><img src="https://i.ibb.co/Pv921PzQ/Screenshot-2026-05-15-at-5-18-00-PM.png" alt="Gallery photo 4"></div>
+    <div class="gallery-slot"><img src="https://i.ibb.co/YFYjzLp9/Screenshot-2026-05-15-at-5-18-15-PM.png" alt="Gallery photo 5"></div>
+    <div class="gallery-slot wide"><img src="https://i.ibb.co/4wBxdMM1/Screenshot-2026-05-15-at-5-20-25-PM.png" alt="Gallery photo 6"></div>
+    <div class="gallery-slot"><img src="https://i.ibb.co/2Y8bGrNq/Screenshot-2026-05-15-at-5-19-11-PM.png" alt="Gallery photo 7"></div>
+    <div class="gallery-slot wide"><img src="https://i.ibb.co/1GPPQVKM/Screenshot-2026-05-15-at-5-20-54-PM.png" alt="Gallery photo 8"></div>
+    <div class="gallery-slot"><img src="https://i.ibb.co/DDbDnCHx/Screenshot-2026-05-15-at-5-19-41-PM.png" alt="Gallery photo 9"></div>
+    <div class="gallery-slot"><img src="https://i.ibb.co/MkvB53nh/Screenshot-2026-05-15-at-5-19-56-PM.png" alt="Gallery photo 10"></div>
+    <div class="gallery-slot wide"><img src="https://i.ibb.co/xt8mnzfY/Screenshot-2026-05-15-at-5-21-11-PM.png" alt="Gallery photo 11"></div>
+    <div class="gallery-slot"><img src="https://i.ibb.co/HLFZjzfS/Screenshot-2026-05-15-at-5-21-49-PM.png" alt="Gallery photo 12"></div>
+    <div class="gallery-slot wide"><img src="https://i.ibb.co/23DJrMJM/Screenshot-2026-05-15-at-5-21-36-PM.png" alt="Gallery photo 13"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="socials">
+  <p class="section-label fade-up">Socials</p>
+  <h2 class="section-title fade-up">Find<br>JC</h2>
+  <div class="socials-grid fade-up">
+
+    <a href="https://www.instagram.com/jc.audiio/" target="_blank" class="social-card">
+      <div class="social-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <div class="social-info">
+        <p class="social-platform">Instagram</p>
+        <p class="social-handle">@jc.audiio</p>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <a href="https://soundcloud.com/dj-jc-ofc-741423398" target="_blank" class="social-card">
+      <div class="social-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M1.175 12.225c-.015.132 0 .263 0 .395s.015.263.03.395l-.03-.395v-.395zm.48-1.65c-.09.197-.165.404-.225.615.06-.211.135-.418.225-.615zm1.545-1.8c-.225.27-.42.563-.585.87.165-.307.36-.6.585-.87zm2.04-1.305c-.315.18-.615.39-.885.63.27-.24.57-.45.885-.63zm2.37-.78c-.36.09-.705.21-1.035.36.33-.15.675-.27 1.035-.36zm2.46-.21c-.405 0-.8.03-1.185.09.385-.06.78-.09 1.185-.09zm12.93 4.74c-.51-2.37-2.61-4.14-5.13-4.14-.9 0-1.755.24-2.49.66V18h7.5c1.245 0 2.25-1.005 2.25-2.25 0-1.095-.78-2.01-1.83-2.22-.015-.15-.03-.3-.03-.45 0-2.52-2.04-4.56-4.56-4.56-.51 0-1.005.09-1.47.24-.645-2.385-2.82-4.14-5.4-4.14C4.815 3 2.25 5.565 2.25 8.745c0 .39.045.765.12 1.125C1.005 10.245 0 11.43 0 12.855 0 14.595 1.41 16.005 3.15 16.005H18.75v-2.01z"/></svg>
+      </div>
+      <div class="social-info">
+        <p class="social-platform">SoundCloud</p>
+        <p class="social-handle">JC</p>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <a href="https://www.youtube.com/@dj_jc_ofc" target="_blank" class="social-card">
+      <div class="social-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </div>
+      <div class="social-info">
+        <p class="social-platform">YouTube</p>
+        <p class="social-handle">JC</p>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <a href="https://open.spotify.com/artist/3X3SIwwXDBZwhD0bgMnMuA" target="_blank" class="social-card">
+      <div class="social-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      </div>
+      <div class="social-info">
+        <p class="social-platform">Spotify</p>
+        <p class="social-handle">JC</p>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <a href="https://music.apple.com/in/artist/jc/1886349188" target="_blank" class="social-card">
+      <div class="social-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a6.303 6.303 0 00-1.973-.75 9.935 9.935 0 00-1.898-.16H6.305a9.92 9.92 0 00-1.898.16 6.303 6.303 0 00-1.973.75C1.316 1.624.57 2.624.254 3.934a9.23 9.23 0 00-.24 2.19C.005 6.5 0 6.754 0 12.004s.005 5.5.014 5.87a9.23 9.23 0 00.24 2.19c.316 1.31 1.062 2.31 2.18 3.043a6.303 6.303 0 001.973.75 9.935 9.935 0 001.898.16h11.406a9.92 9.92 0 001.898-.16 6.303 6.303 0 001.973-.75c1.118-.734 1.863-1.734 2.18-3.043a9.23 9.23 0 00.24-2.19c.009-.37.014-.62.014-5.87s-.005-5.504-.014-5.88zM12 17.5c-3.038 0-5.5-2.462-5.5-5.5S8.962 6.5 12 6.5s5.5 2.462 5.5 5.5-2.462 5.5-5.5 5.5zm5.75-9.75a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5zM12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/></svg>
+      </div>
+      <div class="social-info">
+        <p class="social-platform">Apple Music</p>
+        <p class="social-handle">JC</p>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <a href="https://wa.me/917299912618" target="_blank" class="social-card">
+      <div class="social-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </div>
+      <div class="social-info">
+        <p class="social-platform">WhatsApp</p>
+        <p class="social-handle">+91 72999 12618</p>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="riders">
+  <p class="section-label fade-up">Riders</p>
+  <h2 class="section-title fade-up">Requirements</h2>
+  <p class="rider-intro fade-up">Full rider details for promoters and event organisers. Click each category to expand.</p>
+  <div class="rider-list fade-up">
+
+    <div class="rider-item" onclick="toggleRider(this)">
+      <div class="rider-header">
+        <div class="rider-header-left"><span class="rider-num">01</span><span class="rider-title">Commercials</span></div>
+        <span class="rider-arrow">▼</span>
+      </div>
+      <div class="rider-body">
+        <div class="rider-body-content">
+          <p><strong style="color:var(--white);">Club Nights</strong><br>15,000 INR ++ for a 120-minute set.<br>50% advance on booking. Remaining 50% seven days before the event.</p>
+          <p><strong style="color:var(--white);">Private Events</strong><br>25,000 INR ++ for a 120-minute set. Negotiable.<br>For private event enquiries, contact the artist directly.</p>
+          <p><strong style="color:var(--white);">Others</strong><br>Please contact for more information.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rider-item" onclick="toggleRider(this)">
+      <div class="rider-header">
+        <div class="rider-header-left"><span class="rider-num">02</span><span class="rider-title">Technical</span></div>
+        <span class="rider-arrow">▼</span>
+      </div>
+      <div class="rider-body">
+        <div class="rider-body-content">
+          <p><strong style="color:var(--white);">DJ Controller</strong><br>CDJ 3000 / 3000X — set of 2, minimum. Please confirm the model being provided to the artist beforehand.</p>
+          <p><strong style="color:var(--white);">Mixer</strong><br>DJM-V10 (preferable) or A9 × 1.</p>
+          <p><strong style="color:var(--white);">Monitors</strong><br>Two booth monitors (minimum) positioned on the left and right of the artist. Control to be routed to the mixer.</p>
+          <p><strong style="color:var(--white);">Deck Height</strong><br>95 cm to 105 cm.</p>
+          <p><strong style="color:var(--white);">Sound Check</strong><br>120 minutes before event start. Mandatory.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rider-item" onclick="toggleRider(this)">
+      <div class="rider-header">
+        <div class="rider-header-left"><span class="rider-num">03</span><span class="rider-title">Travel</span></div>
+        <span class="rider-arrow">▼</span>
+      </div>
+      <div class="rider-body">
+        <div class="rider-body-content">
+          <p><strong style="color:var(--white);">Out of Bangalore</strong><br>Flights and hotel stay to be covered by the organiser.<br>Travel within the city of the event to be covered by the organiser.</p>
+          <p><strong style="color:var(--white);">Within Bangalore</strong><br>Koramangala and/or 30-minute radius — N/A.<br>Outside of radius — travel to be covered by the organiser.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rider-item" onclick="toggleRider(this)">
+      <div class="rider-header">
+        <div class="rider-header-left"><span class="rider-num">04</span><span class="rider-title">Hospitality</span></div>
+        <span class="rider-arrow">▼</span>
+      </div>
+      <div class="rider-body">
+        <div class="rider-body-content">
+          <p><strong style="color:var(--white);">Hotel</strong><br>Meals to be covered by the organiser, if applicable.</p>
+          <p><strong style="color:var(--white);">At Venue</strong><br>Three gin and tonic (60ml) at venue and one beer.<br>Food at venue to be covered by the organiser.</p>
+          <p><strong style="color:var(--white);">Private Events</strong><br>For private event hospitality, please contact the artist directly.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="calendar">
+  <p class="section-label fade-up">Calendar</p>
+  <h2 class="section-title fade-up">Dates &amp;<br>Shows</h2>
+  <div class="cal-wrap fade-up">
+    <div class="cal-header">
+      <button class="cal-nav-btn" onclick="calPrev()">← Prev</button>
+      <div style="text-align:center;">
+        <div class="cal-month-label" id="cal-month-label"></div>
+        <div class="cal-year-label" id="cal-year-label"></div>
+      </div>
+      <button class="cal-nav-btn" onclick="calNext()">Next →</button>
+    </div>
+    <div class="cal-days-header">
+      <div class="cal-day-name">Sun</div>
+      <div class="cal-day-name">Mon</div>
+      <div class="cal-day-name">Tue</div>
+      <div class="cal-day-name">Wed</div>
+      <div class="cal-day-name">Thu</div>
+      <div class="cal-day-name">Fri</div>
+      <div class="cal-day-name">Sat</div>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+    <div class="cal-legend">
+      <div class="cal-legend-item"><div class="cal-legend-dot gig"></div>Gig / Show</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot session"></div>JC Session</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot unavailable"></div>Unavailable</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact" style="padding-bottom:7rem;">
+  <div class="contact-wrap fade-up">
+    <div class="contact-card-single">
+      <p class="contact-type">Bookings · Labels · Partnerships · Press · General</p>
+      <p class="contact-title">Get in Touch</p>
+      <p class="contact-desc">For all enquiries — DJ bookings, club nights, festival slots, private events, brand activations, demo submissions, remix requests, press features, sync licensing, collaborations, and everything else. All messages read personally. Response within 48 hours.</p>
+      <a href="mailto:dj.jc.ofc@gmail.com" class="contact-email">dj.jc.ofc@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">JC</span>
+  <div class="footer-copy">
+    <p>Johaan Chanda — JC</p>
+    <p>Bangalore, India · 2026</p>
+    <p style="margin-top:0.75rem;"><a href="tel:+917299912618" style="color:var(--yellow);text-decoration:none;letter-spacing:0.08em;">+91 72999 12618</a></p>
+    <p><a href="mailto:dj.jc.ofc@gmail.com" style="color:var(--yellow);text-decoration:none;letter-spacing:0.08em;">dj.jc.ofc@gmail.com</a></p>
+    <p><a href="https://instagram.com/jc.audiio" target="_blank" style="color:var(--yellow);text-decoration:none;letter-spacing:0.08em;">@jc.audiio</a></p>
+    <p style="color:rgba(136,136,136,0.5);margin-top:0.5rem;">Electronic Press Kit</p>
+  </div>
+</footer>
+
+<script>
+  /* ── CALENDAR ── */
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  // Add events here — format: 'YYYY-MM-DD'
+  // For gigs, add venue and city fields like this:
+  // '2026-06-20': [{ label: 'Groove on the Roof', type: 'gig', venue: 'Groove on the Roof', city: 'Chennai' }],
+  // For sessions:
+  // '2026-06-07': [{ label: 'JC Sessions Vol.2', type: 'session' }],
+  const events = {
+    // '2026-06-07': [{ label: 'JC Sessions Vol.2', type: 'session' }],
+  };
+
+  // Specific blocked dates
+  const blockedDates = new Set([
+    '2026-08-18', '2026-08-19',
+    '2026-12-24', '2026-12-25',
+  ]);
+
+  const now = new Date();
+  let curYear = now.getFullYear();
+  let curMonth = now.getMonth();
+
+  function renderCal() {
+    const label = document.getElementById('cal-month-label');
+    const yearLabel = document.getElementById('cal-year-label');
+    const grid = document.getElementById('cal-grid');
+    if (!label || !grid) return;
+
+    label.textContent = MONTHS[curMonth];
+    yearLabel.textContent = curYear;
+    grid.innerHTML = '';
+
+    const firstDay = new Date(curYear, curMonth, 1).getDay();
+    const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+    const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    for (let i = 0; i < firstDay; i++) {
+      const empty = document.createElement('div');
+      empty.className = 'cal-cell empty';
+      grid.appendChild(empty);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = `${curYear}-${String(curMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const cell = document.createElement('div');
+      const dayEvents = events[dateStr] || [];
+      const dayOfWeek = new Date(curYear, curMonth, d).getDay();
+      const isBlocked = blockedDates.has(dateStr) || dayOfWeek === 1 || dayOfWeek === 2;
+      const cellDate = new Date(curYear, curMonth, d);
+      const isElapsed = cellDate < today;
+
+      cell.className = 'cal-cell'
+        + (dateStr === todayStr ? ' today' : '')
+        + (dayEvents.length ? ' has-event' : '')
+        + (isBlocked ? ' blocked' : '')
+        + (isElapsed && !isBlocked ? ' elapsed' : '');
+
+      const dateEl = document.createElement('div');
+      dateEl.className = 'cal-date';
+      dateEl.textContent = d;
+      cell.appendChild(dateEl);
+
+      if (isBlocked) {
+        const blockEl = document.createElement('span');
+        blockEl.className = 'cal-event blocked-label';
+        blockEl.textContent = 'Unavailable';
+        cell.appendChild(blockEl);
+      } else if (!isElapsed) {
+        cell.style.cursor = 'pointer';
+        cell.addEventListener('click', () => showContactModal(dateStr));
+      }
+
+      dayEvents.forEach(ev => {
+        const evEl = document.createElement('span');
+        evEl.className = `cal-event ${ev.type}`;
+        evEl.textContent = ev.label;
+        cell.appendChild(evEl);
+      });
+
+      grid.appendChild(cell);
+    }
+  }
+
+  function showContactModal(dateStr) {
+    const existing = document.getElementById('cal-modal');
+    if (existing) existing.remove();
+
+    const date = new Date(dateStr + 'T00:00:00');
+    const formatted = date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    const dayEvents = events[dateStr] || [];
+    const gigEvent = dayEvents.find(e => e.type === 'gig');
+    const sessionEvent = dayEvents.find(e => e.type === 'session');
+
+    let gigInfo = '';
+    if (gigEvent && gigEvent.venue) {
+      gigInfo = `
+        <div id="cal-modal-gig-info">
+          ${gigEvent.organiser ? `<div class="cal-modal-gig-row">
+            <span class="cal-modal-gig-label">Organiser</span>
+            <span class="cal-modal-gig-value">${gigEvent.organiser}</span>
+          </div>` : ''}
+          <div class="cal-modal-gig-row">
+            <span class="cal-modal-gig-label">Venue</span>
+            <span class="cal-modal-gig-value">${gigEvent.venue}</span>
+          </div>
+          ${gigEvent.city ? `<div class="cal-modal-gig-row">
+            <span class="cal-modal-gig-label">City</span>
+            <span class="cal-modal-gig-value">${gigEvent.city}</span>
+          </div>` : ''}
+        </div>
+      `;
+    }
+
+    const modalTitle = gigEvent ? 'Upcoming Gig' : sessionEvent ? 'JC Session' : 'Available';
+
+    const modal = document.createElement('div');
+    modal.id = 'cal-modal';
+    modal.innerHTML = `
+      <div id="cal-modal-backdrop" onclick="closeCalModal()"></div>
+      <div id="cal-modal-box">
+        <p id="cal-modal-label">${modalTitle}</p>
+        <p id="cal-modal-date">${formatted}</p>
+        ${gigInfo}
+        <button id="cal-modal-close" onclick="closeCalModal()">✕ Close</button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    requestAnimationFrame(() => modal.classList.add('visible'));
+  }
+
+  function closeCalModal() {
+    const modal = document.getElementById('cal-modal');
+    if (modal) { modal.classList.remove('visible'); setTimeout(() => modal.remove(), 300); }
+  }
+
+  function calPrev() {
+    curMonth--;
+    if (curMonth < 0) { curMonth = 11; curYear--; }
+    renderCal();
+  }
+
+  function calNext() {
+    curMonth++;
+    if (curMonth > 11) { curMonth = 0; curYear++; }
+    renderCal();
+  }
+
+  /* ── RIDERS ── */
+  function toggleRider(item) {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.rider-item').forEach(r => r.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const siblings = e.target.parentElement.querySelectorAll('.fade-up');
+        siblings.forEach((el, i) => setTimeout(() => el.classList.add('visible'), i * 100));
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  renderCal();
+</script>
+</body>
+</html>
