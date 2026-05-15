@@ -30,6 +30,8 @@
   .nav-links a:hover { color: var(--yellow); }
   .nav-cta { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--black); background: var(--yellow); padding: 0.5rem 1.2rem; text-decoration: none; transition: background 0.2s; }
   .nav-cta:hover { background: var(--white); }
+  /* Mobile section picker (hidden on desktop) */
+  .mobile-section-select { display: none; background: var(--gray); color: var(--white); border: 1px solid rgba(240,237,232,0.06); padding: 0.5rem 0.75rem; font-family: var(--font-mono); font-size: 0.85rem; border-radius: 6px; appearance: none; -webkit-appearance: none; -moz-appearance: none; }
 
   /* HERO */
   .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 80px 2.5rem 4rem; position: relative; overflow: hidden; }
@@ -274,6 +276,9 @@
 
   @media (max-width: 768px) {
     nav { padding: 1rem 1.25rem; }
+    /* hide full nav links on small screens and show select */
+    .nav-links { display: none; }
+    .mobile-section-select { display: block; margin-left: 1rem; margin-right: auto; }
     .nav-links { gap: 1rem; }
     .nav-links a { font-size: 0.55rem; }
     section { padding: 4rem 1.25rem; }
@@ -297,6 +302,9 @@
 
 <nav>
   <span class="nav-logo">JC</span>
+  <select id="mobile-section-select" class="mobile-section-select" aria-label="Jump to section">
+    <option value="">Jump to…</option>
+  </select>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#sound">Sound</a></li>
@@ -916,6 +924,57 @@
   });
 
   renderCal();
+</script>
+<script>
+  // Mobile section dropdown: populate from page sections and nav links
+  (function() {
+    const select = document.getElementById('mobile-section-select');
+    if (!select) return;
+
+    // Gather section anchors from nav links (preserves order)
+    const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+    const seen = new Set();
+    navLinks.forEach(a => {
+      const href = a.getAttribute('href') || '';
+      if (href.startsWith('#')) {
+        const id = href.slice(1);
+        if (!seen.has(id) && document.getElementById(id)) {
+          const opt = document.createElement('option');
+          opt.value = id;
+          opt.textContent = a.textContent.trim() || id;
+          select.appendChild(opt);
+          seen.add(id);
+        }
+      }
+    });
+
+    // Fallback: include any section with an id if nav didn't include it
+    document.querySelectorAll('section[id]').forEach(s => {
+      const id = s.id;
+      if (!seen.has(id)) {
+        const title = (s.querySelector('.section-label') || s.querySelector('.section-title'))?.textContent?.trim() || id;
+        const opt = document.createElement('option');
+        opt.value = id;
+        opt.textContent = title;
+        select.appendChild(opt);
+        seen.add(id);
+      }
+    });
+
+    // Navigate on change
+    select.addEventListener('change', function() {
+      const id = this.value;
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (target) {
+        // Close any open rider panels for a cleaner view
+        document.querySelectorAll('.rider-item.open').forEach(r => r.classList.remove('open'));
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Reset select after slight delay so users can reuse it
+        setTimeout(() => { select.value = ''; }, 600);
+      }
+    });
+  })();
 </script>
 </body>
 </html>
