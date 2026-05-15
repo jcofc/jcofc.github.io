@@ -296,11 +296,13 @@
     footer { flex-direction: column; gap: 1.5rem; text-align: center; }
     .footer-copy { text-align: center; }
 
-    /* Calendar: keep header aligned with grid by allowing horizontal scroll and reduced min-width */
-    .cal-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .cal-days-header, .cal-grid { min-width: 490px; }
-    .cal-cell { min-height: 60px; padding: 0.45rem 0.55rem; }
-    .cal-day-name { font-size: 0.52rem; padding: 0.45rem 0; }
+    /* Calendar: fits viewport — Mon/Tue always blocked so their columns are narrower */
+    .cal-wrap { overflow-x: visible; }
+    .cal-days-header, .cal-grid { min-width: unset; grid-template-columns: 1fr 0.42fr 0.42fr 1fr 1fr 1fr 1fr; }
+    .cal-day-name { font-size: 0.46rem; padding: 0.4rem 0; letter-spacing: 0.04em; }
+    .cal-day-name:nth-child(2), .cal-day-name:nth-child(3) { font-size: 0.36rem; letter-spacing: 0; }
+    .cal-cell { min-height: 50px; padding: 0.35rem 0.28rem; }
+    .cal-cell.blocked .cal-event.blocked-label { display: none; }
 
     /* Music: move action buttons under title on mobile */
     .music-item { align-items: flex-start; }
